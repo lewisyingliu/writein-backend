@@ -2,11 +2,11 @@
 FROM gradle:jdk17-alpine AS build
 WORKDIR /app
 COPY --chown=gradle:gradle . /app
-RUN gradle bootJar --no-daemon
+RUN gradle clean build -x test
 
-# Stage 2: Create the final runtime image
-FROM openjdk:17-jdk-slim-buster
+# Stage 2: Create the final image
+FROM openjdk:17-jre-slim
 WORKDIR /app
-EXPOSE 8080
 COPY --from=build /app/build/libs/*.jar app.jar
+EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
