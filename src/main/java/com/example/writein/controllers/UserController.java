@@ -21,10 +21,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 
 import static com.example.writein.utils.Constants.API_ENDPOINT;
 import static com.example.writein.utils.Constants.SERVER_URL;
@@ -33,7 +33,7 @@ import static com.example.writein.utils.Constants.SERVER_URL;
 @RestController
 @RequestMapping(API_ENDPOINT)
 public class UserController {
-    private final Random rand = new Random();
+    private final SecureRandom rand = new SecureRandom();
     @Autowired
     PasswordEncoder encoder;
     @Autowired
